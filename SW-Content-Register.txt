@@ -1,0 +1,158 @@
+Package: OpenART
+Version: 1.0
+Outgoing License: LA_OPT_NXP_Software_License v53 December 2023 - Additional Distribution License granted, license in Section 2.3 applies
+License File: LICENSE
+Description and comments: OpenART is an open source AI develop and verify kit base on NXP MCU.
+Release Location: https://github.com/nxp-appcodehub/dm-ml-openart
+Origin: NXP (BSD-3-Clause)
+        NXP (proprietary)
+        CMSIS (Apache-2.0) - https://github.com/ARM-software/CMSIS_5/releases/tag/5.6.0
+        cmsis_iccarm (Apache-2.0) - https://github.com/ARM-software/CMSIS_5/
+        rt-thread (Apache-2.0 license) - https://github.com/RT-Thread/rt-thread
+        MicroPython (MIT License) - http://github.com/micropython
+        OpenMV (The MIT License) - https://github.com/openmv
+        lvgl_binding_micropython (MIT License) - https://github.com/lvgl/lv_binding_micropython
+        littlevgl (MIT License) - https://github.com/lvgl/lvgl
+        lodepng (Lode Vandevenne) - http://lodev.org/lodepng/
+        TensorFlow Lite ( Apache-2.0) - https://github.com/tensorflow/tensorflow
+        Fatfs (ChaN License) - https://github.com/RT-Thread/rt-thread
+        yModem (Apache-2.0 license) - https://github.com/RT-Thread/rt-thread
+        SFUD (MIT License) - https://github.com/RT-Thread/rt-thread
+        NetBSD (Apache-2.0 license) - https://github.com/RT-Thread/rt-thread
+        specs2 (MIT License ) - http://github.com/etorreborre/specs2/
+
+
+rt-thread                  Name: rt-thread-os                                       
+                           Version: 4.1.1                                    
+                           Outgoing License: Apache-2.0 license            
+                           License File: src/LICENSE                  
+                           Format: source code                               
+                           Description and comments: RT-Thread was born in 2006, 
+                           it is an open source, neutral, and community-based real-time operating system (RTOS).
+                           Release location : https://github.com/RT-Thread/rt-thread
+                           Origin: RT-Thread Development Team
+ 
+
+NetBSD                     Name: NetBSD
+                           Version: N/A
+                           Outgoing License: Apache-2.0 license
+                           License File: src/LICENSE 
+                           Description: Included in RT-Thread project, released with RT-Thread project   
+                           Release location : https://github.com/RT-Thread/rt-thread                       
+                           Origin: NetBSD Foundation, Inc.
+                           
+
+SFUD                       Name: SFUD
+                           Version: N/A
+                           Outgoing License: MIT
+                           License File: components/drivers/spi/sfud/LICENSE 
+                           Description: Serial Flash Universal Driver      
+                           Release location : https://github.com/RT-Thread/rt-thread                    
+                           Origin:  Armink armink.ztl@gmail.com
+
+
+yModem                     Name: yModem
+                           Version: N/A
+                           Outgoing License: Apache-2.0 license
+                           License File: src/LICENSE
+                           Description: Included in RT-Thread project, released with RT-Thread project
+                           Release location : https://github.com/RT-Thread/rt-thread
+                           Origin: Fuzhou Rockchip Electronics Co
+
+Fatfs                      Name: Fatfs
+                           Version: R0.14b
+                           License: ChaN
+                           Outgoing License: Apache-2.0 license
+                           Description: Included in RT-Thread project, released with RT-Thread project
+                           Release location : https://github.com/RT-Thread/rt-thread
+                           Origin:ChaN
+
+cmsis                      Name: CMSIS                                       
+                           Version: 5.6.0                                    
+                           Outgoing License: Apache License 2.0              
+                           License File: bsp/imxrt/libraries/MIMXRT1062/CMSIS/LICENSE.txt                  
+                           Format: source code                               
+                           Description and comments: Vendor-independent hardware          
+                           abstraction layer for microcontrollers that are   
+                           based on Arm Cortex processors, distributed by ARM. cores     
+                           Origin: ARM (Apache-2.0) -https://github.com/ARM-software/CMSIS_5/
+
+cmsis_iccarm               Name: cmsis_iccarm.h                                     
+                           Version: 5.1.0                                    
+                           Outgoing License: Apache License 2.0              
+                           License File: CMSIS/LICENSE.txt                   
+                           Format: header files                               
+                           Description and comments: Vendor-independent hardware          
+                           abstraction layer for microcontrollers that are   
+                           based on Arm Cortex processors, distributed by ARM. cores     
+                           Origin: IAR Systems, ARM (Apache-2.0) - https://github.com/ARM-software/CMSIS_5/	
+
+cmsis_int8_nn              Name: cmsis int8 nn library
+                           Version: 1.0                                    
+                           Outgoing License: NXP proprietary             
+                           Location: bsp\imxrt\components\openmv_port\omv_port                   
+                           Format: library                              
+                           Description and comments: int8 nn library based on cmsis_nn     
+                           Origin: NXP
+
+lvgl_binding_micropython   Name: Python Bindings for LittelvGL                                       
+                           Version: 1.6.0                                    
+                           Outgoing License: MIT License              
+                           License File: bsp/imxrt/components/openmv_port/lv_binding_micropython/LICENSE                  
+                           Format: source code                               
+                           Description and comments: Micropython Binding for lvgl (LittlelvGL) provides an automatically 
+                           generated Micropython module with classes and functions that allow the user access much of the lvgl library.
+                           Origin: Littlev Graphics Library - https://github.com/lvgl/lv_binding_micropython
+
+
+littlevgl                  Name: LittlevGL                                   
+                           Version: 7.10.0                                    
+                           Outgoing License: MIT                             
+                           License File: bsp/imxrt/components/openmv_port/lv_binding_micropython/lvgl/LICENSE.txt              
+                           Format: source code                               
+                           Description: littlevgl graphics library                                                   
+                           Origin: Gabor Kiss-Vamosi - https://github.com/lvgl/lvgl
+
+lodepng                    Name: LodePNG
+                           Version: 20210627
+                           Outgoing License: Lode Vandevenne
+                           License File: bsp/imxrt/components/openmv_port/lv_binding_micropython/driver/png/lodepng/LICENSE             
+                           Format: source code                               
+                           Description: PNG encoder and decoder in C and C++, without dependencies
+                           Origin: Lode Vandevenne - http://lodev.org/lodepng/
+
+TensorFlow Lite            Name: TensorFlow Lite                             
+                           Version: 2.3.1                                    
+                           Outgoing License: Apache-2.0                      
+                           License File: bsp/imxrt/components/openmv_port/nxp_lib/aia_tf/LICENSE            
+                           Format: library                             
+                           Description: Software library for running machine learning models on mobile and embedded devices    
+                           Origin: Google Inc. - https://github.com/tensorflow/tensorflow                 
+
+OpenMV                     Name: OpenMV                           
+                           Version: 4.3.0                                    
+                           Outgoing License: The MIT License (MIT)                      
+                           License File: bsp/imxrt/components/openmv_port/omv_port/LICENSE            
+                           Format: source code                               
+                           Description: The OpenMV project aims at making machine vision more accessible to beginners by developing a user-friendly, 
+                                        open-source, low-cost machine vision platform.    
+                           Release location: https://github.com/openmv
+                           Origin: Ibrahim Abdelkader, Kwabena W. Agyeman
+                              
+
+MicroPython                Name: MicroPython                          
+                           Version: 1.18                                    
+                           Outgoing License: The MIT License (MIT)                     
+                           License File: bsp/imxrt/components/openmv_port/mimxrt_port/LICENSE            
+                           Format: source code                             
+                           Description: This is the MicroPython project, which aims to put an implementation
+                                        of Python 3.x on microcontrollers and small embedded systems.    
+                           Release location: http://github.com/micropython
+                           Origin: Damien P. George
+
+specs2                     Name: specs2                        
+                           Version: 4.3.0                                    
+                           Outgoing License: MIT License                               
+                           Format: source code                             
+                           Description: specs2 is a library for writing executable software specifications in Scala.    
+                           Origin: Eric Torreborre (MIT License) - http://github.com/etorreborre/specs2/

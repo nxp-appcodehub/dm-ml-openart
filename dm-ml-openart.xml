@@ -1,0 +1,41 @@
+<data:item xmlns:data="data" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="data ../../xsd/alp.xsd" id="dm-ml-openart" type="demo" format="projectfile" versionSchema="1.0.0" name="ml-openART">
+    <display_title>
+        ML OpenART on an MCU-based system
+    </display_title>
+    <overview>
+        <![CDATA[OpenART is an open source AI Develop kit base on NXP MCU, which supported most popular engines: TFlite-Micro, CMSIS-NN, Glow and OpenMV&amp;Micropython as well.]]>
+    </overview>
+    <toolchains>
+        <toolchain name="mdk"></toolchain>
+    </toolchains>
+    <families>
+        <family name="imxrt"></family>
+    </families>
+    <nxp_compatible_hw>
+        <hw id="EVK-MIMXRT1060"></hw>
+    </nxp_compatible_hw>
+    <nxp_ebh_hw>
+        <ebh id="nxp_rk043fn66hs_ctg"></ebh>
+    </nxp_ebh_hw>
+    <peripherals>
+        <peripheral name="gpio"></peripheral>
+        <peripheral name="i2c"></peripheral>
+        <peripheral name="pinctrl"></peripheral>
+        <peripheral name="i2s"></peripheral>
+        <peripheral name="pwm"></peripheral>
+        <peripheral name="sensor"></peripheral>
+        <peripheral name="timer"></peripheral>
+        <peripheral name="uart"></peripheral>
+        <peripheral name="video"></peripheral>
+        <peripheral name="sdmmc"></peripheral>
+        <peripheral name="usb"></peripheral>
+        <peripheral name="adc"></peripheral>
+        <peripheral name="clocks"></peripheral>
+        <peripheral name="display"></peripheral>
+        <peripheral name="flash"></peripheral>
+    </peripherals>
+    <categories>
+        <category name="aiml"></category>
+        <category name="vision"></category>
+    </categories>
+</data:item>

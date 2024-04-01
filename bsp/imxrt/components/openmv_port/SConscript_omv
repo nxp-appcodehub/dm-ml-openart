@@ -1,0 +1,193 @@
+from building import *
+import rtconfig
+
+# get current directory
+omv = GetCurrentDir() + '/../openmv'
+mpy = GetCurrentDir() + '/../openmv/src/micropython'
+pwd = GetCurrentDir() 
+src = []
+
+
+src     += Glob(pwd+'/omv_port/omv_main.c')
+# The set of source files associated with this SConscript file.
+src     += Glob(omv+'/src/hal/cmsis/src/dsp/CommonTables/arm_common_tables.c')
+src     += Glob(omv+'/src/hal/cmsis/src/dsp/CommonTables/arm_const_structs.c')
+src     += Glob(omv+'/src/hal/cmsis/src/dsp/FastMathFunctions/arm_sin_q31.c')
+src     += Glob(omv+'/src/hal/cmsis/src/dsp/FastMathFunctions/arm_cos_q31.c')
+src     += Glob(omv+'/src/hal/cmsis/src/dsp/FastMathFunctions/arm_sqrt_q15.c')
+src     += Glob(omv+'/src/hal/cmsis/src/dsp/FastMathFunctions/arm_sqrt_q31.c')
+src     += Glob(omv+'/src/hal/cmsis/src/dsp/FastMathFunctions/arm_sin_q15.c')
+src     += Glob(omv+'/src/hal/cmsis/src/dsp/FastMathFunctions/arm_sin_f32.c')
+src     += Glob(omv+'/src/hal/cmsis/src/dsp/FastMathFunctions/arm_cos_q15.c')
+src     += Glob(omv+'/src/hal/cmsis/src/dsp/FastMathFunctions/arm_cos_f32.c')
+src     += Glob(omv+'/src/hal/cmsis/src/dsp/TransformFunctions/arm_rfft_init_q15.c')
+src     += Glob(omv+'/src/hal/cmsis/src/dsp/TransformFunctions/arm_rfft_init_q31.c')
+
+src     += Glob(omv+'/src/omv/modules/py_imageio.c')
+
+src     += Glob(omv+'/src/omv/modules/py_gif.c')
+
+src     += Glob(omv+'/src/omv/modules/py_clock.c')
+
+src     += Glob(omv+'/src/omv/modules/examplemodule.c')
+src     += Glob(omv+'/src/omv/modules/py_mjpeg.c')
+src     += Glob(omv+'/src/omv/modules/py_omv.c')
+src     += Glob(omv+'/src/omv/modules/py_image.c')
+#src     += Glob(omv+'/src/omv/modules/py_tof.c')
+
+
+if GetDepend(['CONFIG_ULAB_HAS_SCIPY']):
+	src     += Glob(omv+'/src/omv/modules/ulab/code/scipy/linalg/linalg.c')
+	src     += Glob(omv+'/src/omv/modules/ulab/code/scipy/optimize/optimize.c')
+	src     += Glob(omv+'/src/omv/modules/ulab/code/scipy/signal/signal.c')
+	src     += Glob(omv+'/src/omv/modules/ulab/code/scipy/special/special.c')
+	src     += Glob(omv+'/src/omv/modules/ulab/code/scipy/scipy.c')
+
+src     += Glob(omv+'/src/omv/modules/ulab/code/ndarray_operators.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/ulab_tools.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/ndarray.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/ndarray/ndarray_iter.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/ndarray_properties.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/approx.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/compare.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/carray/carray.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/carray/carray_tools.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/create.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/fft/fft.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/fft/fft_tools.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/filter.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/linalg/linalg.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/linalg/linalg_tools.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/numerical.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/poly.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/stats.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/transform.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/vector.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/numpy.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/numpy/io/io.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/user/user.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/utils/utils.c')
+src     += Glob(omv+'/src/omv/modules/ulab/code/ulab.c')
+
+src     += Glob(omv+'/src/omv/alloc/xalloc.c')
+src     += Glob(omv+'/src/omv/alloc/fb_alloc.c')
+src     += Glob(omv+'/src/omv/alloc/umm_malloc.c')
+src     += Glob(omv+'/src/omv/alloc/dma_alloc.c')
+src     += Glob(omv+'/src/omv/alloc/unaligned_memcpy.c')
+src     += Glob(omv+'/src/omv/common/array.c')
+
+src     += Glob(omv+'/src/omv/common/ringbuf.c')
+src     += Glob(omv+'/src/omv/common/trace.c')
+
+src     += Glob(omv+'/src/omv/common/factoryreset.c')
+
+src     += Glob(omv+'/src/omv/imlib/agast.c')
+src     += Glob(omv+'/src/omv/imlib/apriltag.c')
+src     += Glob(omv+'/src/omv/imlib/bayer.c')
+src     += Glob(omv+'/src/omv/imlib/binary.c')
+src     += Glob(omv+'/src/omv/imlib/blob.c')
+src     += Glob(omv+'/src/omv/imlib/bmp.c')
+src     += Glob(omv+'/src/omv/imlib/clahe.c')
+src     += Glob(omv+'/src/omv/imlib/collections.c')
+src     += Glob(omv+'/src/omv/imlib/dmtx.c')
+src     += Glob(omv+'/src/omv/imlib/draw.c')
+src     += Glob(omv+'/src/omv/imlib/edge.c')
+src     += Glob(omv+'/src/omv/imlib/eye.c')
+
+src     += Glob(omv+'/src/omv/imlib/fft.c')
+src     += Glob(omv+'/src/omv/imlib/filter.c')
+src     += Glob(omv+'/src/omv/imlib/fmath.c')
+src     += Glob(omv+'/src/omv/imlib/font.c')
+src     += Glob(omv+'/src/omv/imlib/fsort.c')
+src     += Glob(omv+'/src/omv/imlib/gif.c')
+src     += Glob(omv+'/src/omv/imlib/haar.c')
+src     += Glob(omv+'/src/omv/imlib/hog.c')
+src     += Glob(omv+'/src/omv/imlib/hough.c')
+src     += Glob(omv+'/src/omv/imlib/imlib.c')
+src     += Glob(omv+'/src/omv/imlib/integral.c')
+src     += Glob(omv+'/src/omv/imlib/integral_mw.c')
+src     += Glob(omv+'/src/omv/imlib/jpegd.c')
+src     += Glob(omv+'/src/omv/imlib/jpeg.c')
+if not GetDepend(['MICROPYTHON_USING_LVGL']):
+	src     += Glob(omv+'/src/omv/imlib/lodepng.c')
+src     += Glob(omv+'/src/omv/imlib/png.c')
+src     += Glob(omv+'/src/omv/imlib/lab_tab.c')
+src     += Glob(omv+'/src/omv/imlib/lbp.c')
+src     += Glob(omv+'/src/omv/imlib/line.c')
+src     += Glob(omv+'/src/omv/imlib/lsd.c')
+src     += Glob(omv+'/src/omv/imlib/mathop.c')
+src     += Glob(omv+'/src/omv/imlib/mjpeg.c')
+src     += Glob(omv+'/src/omv/imlib/orb.c')
+src     += Glob(omv+'/src/omv/imlib/phasecorrelation.c')
+src     += Glob(omv+'/src/omv/imlib/point.c')
+src     += Glob(omv+'/src/omv/imlib/pool.c')
+src     += Glob(omv+'/src/omv/imlib/ppm.c')
+src     += Glob(omv+'/src/omv/imlib/qrcode.c')
+src     += Glob(omv+'/src/omv/imlib/qsort.c')
+src     += Glob(omv+'/src/omv/imlib/rainbow_tab.c')
+src     += Glob(omv+'/src/omv/imlib/rectangle.c')
+src     += Glob(omv+'/src/omv/imlib/selective_search.c')
+src     += Glob(omv+'/src/omv/imlib/sincos_tab.c')
+src     += Glob(omv+'/src/omv/imlib/stats.c')
+src     += Glob(omv+'/src/omv/imlib/template.c')
+src     += Glob(omv+'/src/omv/imlib/xyz_tab.c')
+src     += Glob(omv+'/src/omv/imlib/yuv.c')
+src     += Glob(omv+'/src/omv/imlib/zbar.c')
+
+src     += Glob(pwd+'/omv_port/usbdbg.c')
+src     += Glob(pwd+'/omv_port/framebuffer.c')
+src     += Glob(pwd+'/omv_port/ff_wrapper.c')
+src     += Glob(pwd+'/omv_port/mutex.c')
+src     += Glob(pwd+'/omv_port/py_helper.c')
+src     += Glob(pwd+'/omv_port/py_sensor.c')
+src     += Glob(pwd+'/omv_port/py_tf.c')
+src     += Glob(pwd+'/omv_port/sensor_utils.c')
+src     += Glob(pwd+'/omv_port/nxp_module.c')
+
+LDFLAGS = ''
+LIBPATH = [pwd]
+LIBS = []
+path = []
+
+path += [pwd + '/omv_port']
+path += [pwd + '/nxp_lib/aia_tf']
+path += [omv + '/src/omv/alloc']
+path += [omv + '/src/omv/common']
+path += [omv + '/src/omv/imlib']
+path += [omv + '/src/omv/modules']
+path += [omv + '/src/omv/modules/ulab/code']
+path += [omv + '/src/omv/modules/ulab/code/scipy/linalg']
+path += [omv + '/src/omv/modules/ulab/code/scipy/optimize']
+path += [omv + '/src/omv/modules/ulab/code/scipy/special']
+path += [omv + '/src/omv/modules/ulab/code/numpy/ndarray']
+path += [omv + '/src/omv/modules/ulab/code/numpy']
+path += [omv + '/src/omv/modules/ulab/code/numpy/carray']
+path += [omv + '/src/omv/modules/ulab/code/numpy/io']
+path += [omv + '/src/omv/modules/ulab/code/numpy/fft']
+path += [omv + '/src/omv/modules/ulab/code/user']
+path += [omv + '/src/omv/modules/ulab/code/utils']
+
+	
+if GetDepend(['NXP_USING_OMV_TFLITE']):
+	LIBPATH += [pwd+'/omv_port/']
+	LIBPATH += [pwd+'/nxp_lib/aia_tf/']
+	
+LOCAL_CCFLAGS = ''
+
+if rtconfig.CROSS_TOOL == 'gcc':
+	LOCAL_CCFLAGS += ' -std=c99'
+	LIBS += ['tf']
+	LIBS += ['aia_cmsisnn_cm7']
+	LIBS += ['arm_cortexM7lfdp_math']
+	LIBS += ['m']
+	LIBS += ['stdc++']
+
+elif rtconfig.CROSS_TOOL == 'keil':
+	LOCAL_CCFLAGS += '-xc -std=gnu99 -mimplicit-float'
+	LIBS += ['libtf']
+
+CPPDEFINES = ['__SCB_DCACHE_LINE_SIZE=32']
+
+group = DefineGroup('openmv', src, depend = ['NXP_USING_OPENMV'], CPPPATH = path,LOCAL_CCFLAGS=LOCAL_CCFLAGS,LINKFLAGS=LDFLAGS,LIBPATH = LIBPATH ,LIBS = LIBS,CPPDEFINES=CPPDEFINES)
+
+Return('group')
