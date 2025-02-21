@@ -3,4 +3,4 @@
 #define MICROPY_GIT_HASH "<no hash>"
 #define OPENMV_GIT_TAG "v4.3.0-0-g20b98f02"
 #define OPENMV_GIT_HASH "<no hash>"
-#define MICROPY_BUILD_DATE "2023-09-12"
+#define MICROPY_BUILD_DATE "2025-02-20"

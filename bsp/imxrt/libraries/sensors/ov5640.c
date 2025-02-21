@@ -390,7 +390,7 @@ static int set_pixformat(sensor_t *sensor, pixformat_t pixformat)
 
     switch (pixformat) {
         case PIXFORMAT_RGB565:
-            ret |= sensor->cambus_writeb2(sensor, sensor->slv_addr, FORMAT_CONTROL, 0x61);
+            ret |= sensor->cambus_writeb2(sensor, sensor->slv_addr, FORMAT_CONTROL, 0x6F);
             ret |= sensor->cambus_writeb2(sensor, sensor->slv_addr, FORMAT_CONTROL_MUX, 0x01);
             pll = (resolution[sensor->framesize][0] > 2048) ? 0x50 : 0x64; // 32 MHz vs 40 MHz
             break;

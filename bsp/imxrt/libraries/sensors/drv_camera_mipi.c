@@ -30,13 +30,7 @@
 #include "irq.h"
 #include "sensor.h"
 #include "drv_camera.h"
-#include "ov9650.h"
-#include "ov2640.h"
 #include "ov5640.h"
-#include "ov5640_regs.h"
-#include "ov7725.h"
-#include "ov7725_regs.h"
-#include "mt9v034.h"
 #include "framebuffer.h"
 
 #ifdef RT_USING_LCD
@@ -186,8 +180,8 @@ const int resolution[][2] = {
 };
 #define FRAMEBUFFER_SIZE (1280*720*2)
 #define FRAMEBUFFER_COUNT 3
-#define FRAGBUF_LOC  __attribute__((section(".dmaFramebuffer")))
-FRAGBUF_LOC static uint64_t s_dmaFragBufs[2][1280 * 4 / 8];	// max supported line length, XRGB8888(*4)
+#define FRAGBUF_LOC  __attribute__((section(".dmaFramebuffer"))) __attribute__((aligned(16)))
+FRAGBUF_LOC static uint64_t s_dmaFragBufs[2][1280 * 32 / 8];	// max supported line length, XRGB8888(*4)
 
 static struct rt_event frame_event;
 #define EVENT_CSI	(1<<0)
@@ -1451,6 +1445,20 @@ static bool lvgl_running = false;
 void set_lvgl_running(bool enable){
 	lvgl_running = enable;
 }
+
+static void framebuffer_update_lcd()
+{
+#ifdef RT_USING_LCD	
+	image_t main_fb_src;
+    framebuffer_init_image(&main_fb_src);
+    image_t *src = &main_fb_src;
+	
+	static uint8_t fbIdx = 0;
+	
+	LCDMonitor_Update(fbIdx++,pCam->s_irq.isGray, pCam->sensor.wndH, pCam->sensor.wndW, (uint32_t)src->data);
+#endif	
+}
+
 static rt_size_t imx_cam_get_frame(struct rt_camera_device *cam, image_t * image)
 {
 	//mp_printf(&mp_plat_print, "overflow %d\r\n", a);
@@ -1462,7 +1470,13 @@ static rt_size_t imx_cam_get_frame(struct rt_camera_device *cam, image_t * image
 
 	struct imxrt_camera *imx_cam = (struct imxrt_camera *)cam->imx_cam;
 	register rt_ubase_t temp;
-	//relase cpu to usb debug to upload jpeg
+	
+	if(JPEG_FB()->enabled)
+		framebuffer_update_jpeg_buffer();
+	
+	if(!lvgl_running)
+		framebuffer_update_lcd();
+	
 	uint32_t diff = rt_tick_get() - ls_prevTick;
 	if((JPEG_FB()->enabled)&&(diff < s_minProcessTicks)){
 			rt_thread_mdelay(s_minProcessTicks - diff);
@@ -1503,11 +1517,17 @@ static rt_size_t imx_cam_get_frame(struct rt_camera_device *cam, image_t * image
 	
 	framebuffer_init_image(image);
 	
-	if(!lvgl_running){
-		framebuffer_update_jpeg_buffer();
-
-	}
+//	if(!lvgl_running){
+//		#ifdef RT_USING_LCD
+//		static uint8_t fbIdx = 0;
+//		LCDMonitor_Update(fbIdx++,pCam->s_irq.isGray, pCam->sensor.wndH, pCam->sensor.wndW, (uint32_t)buffer->data);
+//		#endif
+//		
+//		//if(JPEG_FB()->enabled)
+//		//	framebuffer_update_jpeg_buffer();
+//	}
 	
+	ls_prevTick = rt_tick_get();
 	return 0;
 }
 

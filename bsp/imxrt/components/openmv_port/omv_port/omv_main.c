@@ -399,7 +399,7 @@ void omv_main()
 static void omv(uint8_t argc, char **argv) {
     omv_main();
 }
-#if 1 //def NXP_OMV_AUTO_START
+#ifdef NXP_OMV_AUTO_START
 INIT_APP_EXPORT(omv_main);
 #endif
 MSH_CMD_EXPORT(omv, OpenMV: `execute python script);

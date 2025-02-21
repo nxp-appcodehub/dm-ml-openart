@@ -116,7 +116,7 @@ STATIC const mp_rom_map_elem_t pyb_module_globals_table[] = {
 #endif
 //
 #if MICROPY_PY_PYBPIN
-    { MP_ROM_QSTR(MP_QSTR_Pin), MP_ROM_PTR(&pyb_pin_type) },
+    { MP_ROM_QSTR(MP_QSTR_Pin), MP_ROM_PTR(&mpy_pin_type) },
 #endif
 //    { MP_ROM_QSTR(MP_QSTR_ExtInt), MP_ROM_PTR(&extint_type) },
 //

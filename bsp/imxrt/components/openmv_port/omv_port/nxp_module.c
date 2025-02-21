@@ -179,9 +179,9 @@ STATIC mp_obj_t py_tf_compare_tensor_angle(uint n_args, const mp_obj_t *args, mp
 	
     if(!mp_obj_is_type(o,&mp_type_bytearray))
 	{
-		uint32_t t = ((mp_obj_base_t *)MP_OBJ_TO_PTR(o))->type;
 		
-		nlr_raise(mp_obj_new_exception_msg_varg(&mp_type_ValueError, MP_ERROR_TEXT("tesnor is not byte array :%x:%x"), t,o));
+		
+		nlr_raise(mp_obj_new_exception_msg_varg(&mp_type_ValueError, MP_ERROR_TEXT("tesnor is not byte array :%x"),o));
 	}
 	tensor= (float*)o->items;
 	
@@ -193,9 +193,8 @@ STATIC mp_obj_t py_tf_compare_tensor_angle(uint n_args, const mp_obj_t *args, mp
 	
     if(!mp_obj_is_type(o,&mp_type_bytearray))
 	{
-		uint32_t t = ((mp_obj_base_t *)MP_OBJ_TO_PTR(o))->type;
 		
-		nlr_raise(mp_obj_new_exception_msg_varg(&mp_type_ValueError, MP_ERROR_TEXT("base is not byte array :%x:%x"), t,o));
+		nlr_raise(mp_obj_new_exception_msg_varg(&mp_type_ValueError, MP_ERROR_TEXT("base is not byte array :%x"), o));
 	}
 	float *base = (float*)o->items;
     if(base == NULL)

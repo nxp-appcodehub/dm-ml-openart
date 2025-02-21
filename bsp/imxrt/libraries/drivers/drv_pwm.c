@@ -27,7 +27,8 @@
 #define DEFAULT_PRE                   5
 #define DEFAULT_DUTY                  50
 #define DEFAULT_FRE                   1000
-#ifdef SOC_MIMXRT1170_SERIES
+
+#ifdef SOC_IMXRT1170_SERIES
 #define PWM_SRC_CLK_FREQ              CLOCK_GetRootClockFreq(kCLOCK_Root_Bus)
 #else
 #define PWM_SRC_CLK_FREQ              CLOCK_GetFreq(kCLOCK_IpgClk)

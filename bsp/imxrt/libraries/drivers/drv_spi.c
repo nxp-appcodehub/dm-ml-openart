@@ -202,7 +202,10 @@ rt_err_t rt_hw_spi_device_attach(const char *bus_name, const char *device_name, 
 static uint32_t imxrt_get_lpspi_freq(void)
 {
     uint32_t freq = 0;
-
+	
+	#ifdef SOC_MIMXRT1176DVMMA
+	return CLOCK_GetRootClockFreq(kCLOCK_Root_Lpspi1);
+	#else
     /* CLOCK_GetMux(kCLOCK_LpspiMux):
        00b: derive clock from PLL3 PFD1 720M
        01b: derive clock from PLL3 PFD0 720M
@@ -231,6 +234,7 @@ static uint32_t imxrt_get_lpspi_freq(void)
     freq /= (CLOCK_GetDiv(kCLOCK_LpspiDiv) + 1U);
 
     return freq;
+	#endif
 }
 
 static void lpspi_normal_config(struct imxrt_spi *spi)
@@ -247,13 +251,23 @@ static void lpspi_normal_config(struct imxrt_spi *spi)
 static void lpspi_dma_config(struct imxrt_spi *spi)
 {
     RT_ASSERT(spi != RT_NULL);
+	
+	#ifdef SOC_MIMXRT1176DVMMA
+	DMAMUX_SetSource(DMAMUX0, spi->dma->rx_channel, spi->dma->rx_request);
+    DMAMUX_EnableChannel(DMAMUX0, spi->dma->rx_channel);
+    
 
+    DMAMUX_SetSource(DMAMUX0, spi->dma->tx_channel, spi->dma->tx_request);
+    DMAMUX_EnableChannel(DMAMUX0, spi->dma->tx_channel);
+	#else
     DMAMUX_SetSource(DMAMUX, spi->dma->rx_channel, spi->dma->rx_request);
     DMAMUX_EnableChannel(DMAMUX, spi->dma->rx_channel);
-    EDMA_CreateHandle(&spi->dma->rx_edma, DMA0, spi->dma->rx_channel);
+    
 
     DMAMUX_SetSource(DMAMUX, spi->dma->tx_channel, spi->dma->tx_request);
     DMAMUX_EnableChannel(DMAMUX, spi->dma->tx_channel);
+	#endif
+	EDMA_CreateHandle(&spi->dma->rx_edma, DMA0, spi->dma->rx_channel);
     EDMA_CreateHandle(&spi->dma->tx_edma, DMA0, spi->dma->tx_channel);
 
     LPSPI_MasterTransferCreateHandleEDMA(spi->base,
@@ -262,7 +276,7 @@ static void lpspi_dma_config(struct imxrt_spi *spi)
                                         spi,
                                         &spi->dma->rx_edma,
                                         &spi->dma->tx_edma);
-
+	
     LOG_D("%s dma config done\n", spi->bus_name);
 }
 
@@ -320,7 +334,7 @@ static rt_err_t spi_configure(struct rt_spi_device *device, struct rt_spi_config
     masterConfig.whichPcs = kLPSPI_Pcs0;
 
 #if defined(SOC_IMXRT1170_SERIES)
-       freq = CLOCK_GetFreqFromObs(spi->masterclock, 2);
+       int freq = CLOCK_GetFreqFromObs(spi->masterclock, 2);
        LPSPI_MasterInit(spi->base, &masterConfig, freq);
 #else
     masterConfig.pinCfg                        = kLPSPI_SdiInSdoOut;

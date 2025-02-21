@@ -27,7 +27,8 @@ documentation/html
 *.obj
 *.bak
 *.dep
-bsp/imxrt/libraries/MIMXRT1170/CMSIS/DSP_Lib/Lib/
+bsp/imxrt/components/openmv
+bsp/imxrt/libraries/MIMXRT1170/CMSIS/DSP_Lib
 *.a
 *.i
 *.d

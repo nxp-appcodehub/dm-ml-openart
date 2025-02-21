@@ -85,7 +85,7 @@ STATIC mp_obj_t mod_os_stat(mp_obj_t path_in) {
     mp_obj_tuple_t *t = MP_OBJ_TO_PTR(mp_obj_new_tuple(10, NULL));
     t->items[0] = MP_OBJ_NEW_SMALL_INT(sb.st_mode);
     t->items[1] = mp_obj_new_int_from_uint(sb.st_ino);
-    t->items[2] = mp_obj_new_int_from_uint(sb.st_dev);
+    t->items[2] = mp_obj_new_int_from_uint(sb.st_ino);
     t->items[3] = mp_obj_new_int_from_uint(sb.st_nlink);
     t->items[4] = mp_obj_new_int_from_uint(sb.st_uid);
     t->items[5] = mp_obj_new_int_from_uint(sb.st_gid);

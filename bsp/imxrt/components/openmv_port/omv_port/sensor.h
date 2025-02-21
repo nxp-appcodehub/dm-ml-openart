@@ -8,8 +8,8 @@
  *
  * Sensor abstraction layer.
  */
-#ifndef __SENSOR_H__
-#define __SENSOR_H__
+#ifndef __OMV_SENSOR_H__
+#define __OMV_SENSOR_H__
 #include <stdarg.h>
 #include "cambus.h"
 #include "imlib.h"
@@ -461,4 +461,4 @@ int sensor_snapshot(sensor_t *sensor, image_t *image, uint32_t flags);
 
 // Convert sensor error codes to strings.
 const char *sensor_strerror(int error);
-#endif /* __SENSOR_H__ */
+#endif /* __OMV_SENSOR_H__ */
