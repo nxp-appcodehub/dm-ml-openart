@@ -386,6 +386,7 @@
 #define WEIT_CACHE_SIZE 61440
 #define NXP_USING_OMV_TFLITE
 #define NXP_USING_GLOW
+#define NXP_OMV_AUTO_START
 
 /* ULAB */
 
